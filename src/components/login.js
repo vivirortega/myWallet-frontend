@@ -16,14 +16,14 @@ export default function Login() {
       <Form onSubmit={loginUser}>
         <Input
           type="email"
-          placeholder="email"
+          placeholder="Email"
           value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
         ></Input>
         <Input
           type="password"
-          placeholder="senha"
+          placeholder="Senha"
           value={password}
           required
           onChange={(e) => setPassword(e.target.value)}
