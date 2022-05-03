@@ -1,7 +1,83 @@
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { useState } from "react";
+
 export default function Wallet() {
-    return (
-        <>
-        <h1>Carteira</h1>
-        </>
-    )
+  return (
+    <Container>
+      <h1>Olá, fulano</h1>
+      <Registers>
+        <p>Não há registros de entrada ou saída</p>
+      </Registers>
+      <Deposits>
+      <Insert>
+        <h2>Nova entrada</h2>
+      </Insert>
+      <Remove>
+        <h2>Nova saída</h2>
+      </Remove>
+      </Deposits>
+    </Container>
+  );
 }
+
+const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #8c11be;
+  width: 100vw;
+  height: 100vh;
+
+  h1 {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 31px;
+    margin-bottom: 22px;
+  }
+`;
+
+const Registers = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 5px;
+    width: 326px;
+    height: 446px;
+    font-size: 20px;
+    color: #868686;
+    text-align: center;
+`
+const Deposits = styled.div`
+ display: flex;
+ flex-direction: row;
+ gap: 15px;
+ margin-top: 13px;
+`
+
+const Insert = styled.button`
+  background-color: #a328d6;
+  border-radius: 5px;
+  border: none;
+  width: 155px;
+  height: 114px;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20px;
+`;
+const Remove = styled.button`
+  background-color: #a328d6;
+  border-radius: 5px;
+  border: none;
+  width: 155px;
+  height: 114px;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20px;
+`;
