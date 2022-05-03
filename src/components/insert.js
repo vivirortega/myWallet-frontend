@@ -1,5 +1,10 @@
+import styled from "styled-components";
+
 export default function Insert() {
+    return (
     <>
-    <h1>Inserir dinheiro</h1>
+    <h1>Insert</h1>
     </>
+    )
 }
+
