@@ -11,10 +11,14 @@ export default function Wallet() {
       </Registers>
       <Deposits>
       <Insert>
+      <Link to="/carteira/insert">
         <h2>Nova entrada</h2>
+        </Link>
       </Insert>
       <Remove>
+          <Link to="/carteira/remove">
         <h2>Nova saída</h2>
+        </Link>
       </Remove>
       </Deposits>
     </Container>
@@ -69,6 +73,13 @@ const Insert = styled.button`
   font-size: 17px;
   font-weight: 700;
   line-height: 20px;
+  
+  h2 {
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20px;
+  }
 `;
 const Remove = styled.button`
   background-color: #a328d6;
@@ -76,8 +87,11 @@ const Remove = styled.button`
   border: none;
   width: 155px;
   height: 114px;
+  
+  h2 {
   color: #ffffff;
   font-size: 17px;
   font-weight: 700;
   line-height: 20px;
+  }
 `;
