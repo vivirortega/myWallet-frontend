@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import UserContext from "../contexts/UserContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {setName, setUser} = useContext(UserContext);
   const navigate = useNavigate();
   const API_URL = "http://localhost:5000/sign-in";
 
@@ -19,7 +21,10 @@ export default function Login() {
 
     const promise = axios.post(API_URL, userData);
     promise.then((response) => {
+      setUser(response.data.token);
+      setName(response.data.name);
       navigate("/registers");
+      console.log("deu certo")
     });
     promise.catch((err) => {
       console.log(err);

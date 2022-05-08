@@ -9,8 +9,9 @@ import Remove from "./components/remove";
 
 export default function App() {
   const [user, setUser] = useState("");
+  const [name, setName] = useState("");
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, name, setName }}>
       <BrowserRouter>
         <Routes>
           <Route path="/sign-in" element={<Login />} />
