@@ -1,15 +1,31 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const API_URL = "http://localhost:5000/sign-in";
 
   function loginUser(event) {
-    event.preventDefault();
+    event.preventDefault();  
+
+    const userData = {
+      email: email,
+      password: password,
+    };
+
+    const promise = axios.post(API_URL, userData);
+    promise.then((response) => {
+      navigate("/registers");
+    });
+    promise.catch((err) => {
+      console.log(err);
+    });
   }
+
   return (
     <Container>
       <h1>MyWallet</h1>
@@ -30,7 +46,7 @@ export default function Login() {
         ></Input>
         <Submit type="submit">Entrar</Submit>
       </Form>
-      <Link to="/cadastro">
+      <Link to="/sign-up">
         <p>Primeira vez? Cadastre-se!</p>
       </Link>
     </Container>
@@ -45,6 +61,7 @@ const Container = styled.main`
   background-color: #8c11be;
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
 
   h1 {
     font-family: "Saira Stencil One", sans-serif;

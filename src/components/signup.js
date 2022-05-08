@@ -1,14 +1,37 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
+import axios from "axios";
 
 export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+  const API_URL = "http://localhost:5000/sign-up";
 
   function signUpUser(event) {
     event.preventDefault();
+
+    if(confirmPassword !== password) {
+      alert("Dados não conferem");
+      return;
+    }
+    const registerData = {
+      name: name,
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword
+    };
+
+    const promise = axios.post(API_URL, registerData);
+    promise.then((response) => {
+      navigate("/");
+    });
+    promise.catch((err) => {
+      console.log(err);
+    });
   }
 
   return (
@@ -39,13 +62,13 @@ export default function SignUp() {
         <Input
           type="password"
           placeholder="Confirme a senha"
-          value={password}
+          value={confirmPassword}
           required
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         ></Input>
         <Submit type="submit">Cadastrar</Submit>
       </Form>
-      <Link to="/">
+      <Link to="/sign-in">
         <p>Já tem uma conta? Entre agora!</p>
       </Link>
     </Container>
@@ -60,6 +83,7 @@ const Container = styled.main`
   background-color: #8c11be;
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
 
   h1 {
     font-family: "Saira Stencil One", sans-serif;
