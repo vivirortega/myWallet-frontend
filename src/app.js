@@ -17,8 +17,8 @@ export default function App() {
           <Route path="/sign-in" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/registers" element={<Wallet />} />
-          <Route path="/carteira/insert" element={<Insert />} />
-          <Route path="/carteira/remove" element={<Remove />} />
+          <Route path="/insert" element={<Insert />} />
+          <Route path="/registers/remove" element={<Remove />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

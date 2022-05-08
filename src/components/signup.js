@@ -14,7 +14,7 @@ export default function SignUp() {
   function signUpUser(event) {
     event.preventDefault();
 
-    if(confirmPassword !== password) {
+    if (confirmPassword !== password) {
       alert("Dados não conferem");
       return;
     }
@@ -22,7 +22,7 @@ export default function SignUp() {
       name: name,
       email: email,
       password: password,
-      confirmPassword: confirmPassword
+      confirmPassword: confirmPassword,
     };
 
     const promise = axios.post(API_URL, registerData);

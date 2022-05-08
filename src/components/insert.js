@@ -1,14 +1,32 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import axios from "axios";
+import UserContext from "../contexts/UserContext";
 
 export default function Insert() {
-  const [value, setValue] = useState("");
-  const [description, setDescription] = useState("");
+  const [insert, setInsert] = useState({ date: 0, value: "", description: "" });
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+  const API_URL = "http://localhost:5000/insert";
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user}`,
+    },
+  };
 
   function saveInsert(event) {
     event.preventDefault();
   }
+
+  const promise = axios.post(API_URL, insert, config);
+  promise.then((response) => {
+    navigate("/registers");
+  });
+  promise.catch((err) => {
+    console.log(err);
+  });
+
   return (
     <Container>
       <h1>Nova entrada</h1>
@@ -16,18 +34,25 @@ export default function Insert() {
         <Input
           type="number"
           placeholder="Valor"
-          value={value}
+          value={insert.value}
           required
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => setInsert({ ...insert, value: e.target.value })}
         ></Input>
         <Input
           type="text"
           placeholder="Descrição"
-          value={description}
+          value={insert.description}
           required
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) =>
+            setInsert({ ...insert, description: e.target.value })
+          }
         ></Input>
-        <Submit type="submit">Salvar entrada</Submit>
+        <Submit
+          type="submit"
+          onClick={() => setInsert({ ...insert, date: Date.now() })}
+        >
+          Salvar entrada
+        </Submit>
       </Form>
     </Container>
   );

@@ -7,12 +7,12 @@ import UserContext from "../contexts/UserContext";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {setName, setUser} = useContext(UserContext);
+  const { setName, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const API_URL = "http://localhost:5000/sign-in";
 
   function loginUser(event) {
-    event.preventDefault();  
+    event.preventDefault();
 
     const userData = {
       email: email,
@@ -24,7 +24,6 @@ export default function Login() {
       setUser(response.data.token);
       setName(response.data.name);
       navigate("/registers");
-      console.log("deu certo")
     });
     promise.catch((err) => {
       console.log(err);
