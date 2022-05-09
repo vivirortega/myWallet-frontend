@@ -2,12 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useContext } from "react";
 import axios from "axios";
-import UserContext from "../contexts/UserContext";
+import UserContext from "../contexts/usercontext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setName, setUser } = useContext(UserContext);
+  const { setName, setToken } = useContext(UserContext);
   const navigate = useNavigate();
   const API_URL = "http://localhost:5000/sign-in";
 
@@ -21,9 +21,11 @@ export default function Login() {
 
     const promise = axios.post(API_URL, userData);
     promise.then((response) => {
-      setUser(response.data.token);
+      setToken(response.data);
       setName(response.data.name);
-      navigate("/registers");
+      navigate("/wallet");
+      console.log(response);
+      console.log("esse é o data", response.data);
     });
     promise.catch((err) => {
       console.log(err);

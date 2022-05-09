@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import UserContext from "./contexts/UserContext";
+import UserContext from "./contexts/usercontext";
 import { useState } from "react";
 import Login from "./components/login";
 import SignUp from "./components/signup";
@@ -8,17 +8,17 @@ import Insert from "./components/insert";
 import Remove from "./components/remove";
 
 export default function App() {
-  const [user, setUser] = useState("");
+  const [token, setToken] = useState("");
   const [name, setName] = useState("");
   return (
-    <UserContext.Provider value={{ user, setUser, name, setName }}>
+    <UserContext.Provider value={{ token, setToken, name, setName }}>
       <BrowserRouter>
         <Routes>
           <Route path="/sign-in" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/registers" element={<Wallet />} />
-          <Route path="/insert" element={<Insert />} />
-          <Route path="/registers/remove" element={<Remove />} />
+          <Route path="/wallet" element={<Wallet />} />
+          <Route path="/registers" element={<Insert />} />
+          <Route path="/registers" element={<Remove />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

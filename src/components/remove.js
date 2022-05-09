@@ -1,13 +1,31 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useContext } from "react";
+import UserContext from "../contexts/usercontext";
+
 
 export default function Remove() {
-  const [value, setValue] = useState("");
-  const [description, setDescription] = useState("");
+  const [remove, setRemove] = useState({ date: 0, value: "", description: "" });
+  const { token } = useContext(UserContext);
+  const navigate = useNavigate();
+  const API_URL = "http://localhost:5000/registers";
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
   function saveRemove(event) {
     event.preventDefault();
+
+    const promise = axios.post(API_URL, remove, config);
+    promise.then((response) => {
+      navigate("/registers");
+    });
+    promise.catch((err) => {
+      console.log(err);
+    });
   }
 
   return (
@@ -17,16 +35,16 @@ export default function Remove() {
         <Input
           type="number"
           placeholder="Valor"
-          value={value}
+          value={remove.value}
           required
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => setRemove({ ...remove, value: e.target.value })}
         ></Input>
         <Input
           type="text"
           placeholder="Descrição"
-          value={description}
+          value={remove.description}
           required
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => setRemove({ ...remove, value: e.target.value })}
         ></Input>
         <Submit type="submit">Salvar saída</Submit>
       </Form>

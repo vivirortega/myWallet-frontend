@@ -2,31 +2,31 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useContext } from "react";
 import axios from "axios";
-import UserContext from "../contexts/UserContext";
+import UserContext from "../contexts/usercontext";
 
 export default function Insert() {
   const [insert, setInsert] = useState({ date: 0, value: "", description: "" });
-  const { user } = useContext(UserContext);
+  const { token } = useContext(UserContext);
   const navigate = useNavigate();
-  const API_URL = "http://localhost:5000/insert";
+  const API_URL = "http://localhost:5000/registers";
   const config = {
     headers: {
-      Authorization: `Bearer ${user}`,
+      Authorization: `Bearer ${token}`,
     },
   };
-
+  
   function saveInsert(event) {
     event.preventDefault();
+
+    const promise = axios.post(API_URL, insert, config);
+    promise.then((response) => {
+      navigate("/registers");
+    });
+    promise.catch((err) => {
+      console.log(err);
+      console.log(config);
+    });
   }
-
-  const promise = axios.post(API_URL, insert, config);
-  promise.then((response) => {
-    navigate("/registers");
-  });
-  promise.catch((err) => {
-    console.log(err);
-  });
-
   return (
     <Container>
       <h1>Nova entrada</h1>
