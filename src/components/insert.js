@@ -11,7 +11,7 @@ export default function Insert() {
   const API_URL = "http://localhost:5000/registers";
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token.token}`,
     },
   };
   
@@ -20,7 +20,8 @@ export default function Insert() {
 
     const promise = axios.post(API_URL, insert, config);
     promise.then((response) => {
-      navigate("/registers");
+      navigate("/wallet");
+      console.log(response);
     });
     promise.catch((err) => {
       console.log(err);

@@ -12,7 +12,7 @@ export default function Remove() {
   const API_URL = "http://localhost:5000/registers";
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token.token}`,
     },
   };
 
@@ -21,7 +21,7 @@ export default function Remove() {
 
     const promise = axios.post(API_URL, remove, config);
     promise.then((response) => {
-      navigate("/registers");
+      navigate("/wallet");
     });
     promise.catch((err) => {
       console.log(err);
